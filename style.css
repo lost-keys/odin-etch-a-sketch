@@ -10,8 +10,12 @@ html {
   height: 512px;
 }
 
+#toolbar {
+  margin-bottom: 16px;
+}
+
 .cell {
   background-color: lightgrey;
-  border: 1px solid white;
-  flex: 1 1 30px;
+  flex-grow: 1;
+  flex-shrink: 0;
 }

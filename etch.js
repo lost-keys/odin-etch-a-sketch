@@ -1,13 +1,24 @@
 const canvas = document.querySelector("#canvas");
 
-function drawGrid(gridSize = 16) {
+function drawGrid(cellsPerSide = 16, canvasSize = 512) {
   let cell = document.createElement("div");
-  cell.classList.add("cell")
+  cell.classList.add("cell");
+  cell.style["flex-basis"] = calculateCellSize(canvasSize, cellsPerSide);
 
-  for (x = 0; x < gridSize; x++) {
-    for (y = 0; y < gridSize; y++) {
+  for (x = 0; x < cellsPerSide; x++) {
+    for (y = 0; y < cellsPerSide; y++) {
       canvas.appendChild(cell.cloneNode());
     }
+  }
+}
+
+function calculateCellSize(canvasSize, cellsPerSide) {
+  return (canvasSize / cellsPerSide) + "px";
+}
+
+function clearGrid() {
+  while (canvas.firstChild) {
+    canvas.removeChild(canvas.lastChild);
   }
 }
 
@@ -15,7 +26,20 @@ function drawGrid(gridSize = 16) {
 // the mouse passes over them
 canvas.addEventListener("mouseover", (e) => {
   let target = e.target;
-  target.setAttribute("style", "background-color: grey");
+  // prevents the canvas itself fom being colored due to DOM bubbling
+  if (target.className === "cell") {
+    target.style.backgroundColor = "grey";
+  }
 });
 
+// Allows the user to change the size of the grid, removes the
+// old grid and generates a new one based on a user inputed size
+const gridSize = document.querySelector("#grid-size");
+gridSize.addEventListener("click", (e) => {
+  size = prompt("Enter a new grid size (maximum 100).");
+  clearGrid();
+  drawGrid(size);
+})
+
+// Draw the initial grid on page load
 drawGrid();
