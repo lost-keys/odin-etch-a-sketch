@@ -1,5 +1,6 @@
+const canvas = document.querySelector("#canvas");
+
 function drawGrid(gridSize = 16) {
-  const canvas = document.querySelector("#canvas");
   let cell = document.createElement("div");
   cell.classList.add("cell")
 
@@ -9,5 +10,12 @@ function drawGrid(gridSize = 16) {
     }
   }
 }
+
+// Create hover "sketch" effect so that the divs change color when
+// the mouse passes over them
+canvas.addEventListener("mouseover", (e) => {
+  let target = e.target;
+  target.setAttribute("style", "background-color: grey");
+});
 
 drawGrid();
