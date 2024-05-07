@@ -32,11 +32,19 @@ canvas.addEventListener("mouseover", (e) => {
   }
 });
 
+function getGridSize() {
+  let size = 0;
+  while (size < 1 || size > 100) {
+    size = prompt("Enter a new grid size (maximum 100).");
+  }
+  return size;
+}
+
 // Allows the user to change the size of the grid, removes the
 // old grid and generates a new one based on a user inputed size
 const gridSize = document.querySelector("#grid-size");
 gridSize.addEventListener("click", (e) => {
-  size = prompt("Enter a new grid size (maximum 100).");
+  size = getGridSize();
   clearGrid();
   drawGrid(size);
 })
