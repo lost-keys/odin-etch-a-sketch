@@ -1,0 +1,17 @@
+html {
+  background-color: #2d2d2d;
+}
+
+#canvas {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  width: 512px;
+  height: 512px;
+}
+
+.cell {
+  background-color: lightgrey;
+  border: 1px solid white;
+  flex: 1 1 30px;
+}
